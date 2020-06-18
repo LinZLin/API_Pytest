@@ -1,0 +1,49 @@
+Collections:  # 必填
+  dec: "百度测试"   # 非必填
+  host: https://www.baidu.com # 必填
+  header: { # 必填
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko)\
+              Chrome/67.0.3396.99 Safari/537.36",
+    "Content-Type": "keep-alive"
+  }
+  parameters:
+    -
+      title: 标题1  # 必填
+      url: /sugrec/  # 必填
+      method: get  # 必填
+      # get的data直接写  必填
+      data: data_value=$data_value&code_value=$code_value
+
+      validate:  # 必填
+        - eq:
+            - status_code
+            - 200
+
+      # 非必填
+      variables:  # 需要获取的变量值（本用例需要）
+        - login: # 提取变量的测试用例
+            - code_value
+            - data_value  # 变量名
+
+      # 非必填
+      relevance: # 提取出去的变量（提供其它用例）
+        id: content.data  # 变量名: 变量位置
+
+    -
+      title: 标题2
+      url: /users/95c34f9cc50c/collections_and_notebooks/$audid
+      method: post
+      data:
+        json:  # 如果data是json格式，需指定。必填
+          slug1: "95c34f9cc50c"
+          slug2: "basic_id"
+      validate:
+        - eq:
+            - content.msg
+            - ok
+        - contains:
+            - content.msg
+            - 失败
+      variables:  # 需要获取的变量值
+        - login: # 提取变量的测试用例
+            - basic_id  # 变量名
