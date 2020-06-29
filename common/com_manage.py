@@ -117,7 +117,6 @@ class ComManage:
                         variables_value = self.variables_value(yaml_path, yaml_name, variables_data)
                 # 把依赖数据变量替换依赖数据的值
                 request_dict = self.com_params.replace_request(request_dict, variables_value)
-                # print(F"request_dict:{request_dict}")
             response = ComRequest().send_request(request_dict)
             return response
         except Exception as e:

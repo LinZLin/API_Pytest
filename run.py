@@ -23,7 +23,7 @@ class Run:
 
     def run_case(self):
         # 执行测试
-        args = ["-s", "-n", "4", "--alluredir", F"{self.report_path[0]}"]
+        args = ["-s", "-n", "1", "--alluredir", F"{self.report_path[0]}"]
         pytest.main(args)
         # 生成测试报告
         cmd = F"allure generate --clean {self.report_path[0]} -o {self.report_path[1]}"
